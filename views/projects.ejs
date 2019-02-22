@@ -1,0 +1,173 @@
+<% include ../partials/headers %>
+
+<div class="container">
+  <h1><strong> PROJECT </strong></h1>
+  <hr class="my-2">
+  <!-- ============================== FILTERS ==============================-->
+  <h2><strong> FILTERS </strong></h2>
+  <form action="" method="get">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <input class="form-check-input" type="checkbox" name="checkid" value="true" <%=query.checkid ?' checked' : '' ; %>>ID
+      </label>
+      <div class="col-10">
+        <input class="form-control" type="text" placeholder="ID" id="example-text-input" name="formid" value="<%= query.formid %>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <input class="form-check-input" type="checkbox" name="checkname" value="true" <%=query.checkname ?' checked' : '' ; %>>Name
+      </label>
+      <div class="col-10">
+        <input class="form-control" type="text" placeholder="Name" id="example-text-input" name="formname" value="<%= query.formname %>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <input class="form-check-input" type="checkbox" name="checkmember" value="true" <%=query.checkmember ? ' checked' : '' ; %>>Member
+      </label>
+      <div class="col-10">
+        <select class="custom-select" name="member">
+          <option>Choose The Member...</option>
+          <% users.forEach((item) => { %>
+            <option <%=query.member==item.fullname ? ' selected' : '' ; %> </option> <%= `${item.fullname}` %>
+            <% }); %>
+          </select>
+        </div>
+      </div>
+
+      <div><br></div>
+      <button type="submit" class="btn btn-primary">Search</button>
+      <hr class="my-2">
+    </form>
+    <br>
+    <!-- ============================== OPTIONS ==============================-->
+    <form action="/projects" method="post">
+      <h2><strong> OPTION </strong></h2>
+      <div class="form-group row">
+        <div class="col-sm-2">Checkbox</div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi1" value="true"  <%= opsi.opsi1 ?' checked' : '' ; %>>
+            <label class="form-check-label" for="gridCheck1">
+              ID
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi2" value="true" <%= opsi.opsi2 ? 'checked' : ''; %>>
+            <label class="form-check-label" for="gridCheck1">
+              Name
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi3" value="true" <%= opsi.opsi3 ? 'checked' : ''; %>>
+            <label class="form-check-label" for="gridCheck1">
+              Members
+            </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Apply</button>
+    </form>
+    <hr class="my-2">
+    <!-- ============================== TABLE ==============================-->
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <%if(opsi.opsi1){%>
+            <th scope="col">ID</th>
+            <%}%>
+            <%if(opsi.opsi2){%>
+              <th scope="col">Nama Project</th>
+              <%}%>
+              <%if(opsi.opsi3){%>
+                <th scope="col">Members</th>
+                <%}%>
+                <th scope="col">Actions</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <% data.forEach((item) => { %>
+                <tr>
+                  <%if(opsi.opsi1){%>
+                    <th scope="row">
+
+                      <a href="/projects/<%=  item.projectid %>/project_detail_page_overview"><%= item.projectid %></a>
+
+                    </th>
+                    <%}%>
+                    <%if(opsi.opsi2){%>
+                      <td>
+                        <%= item.name %>
+                      </td>
+                      <%}%>
+                      <%if(opsi.opsi3){%>
+                        <td>
+                          <%= item.members %>
+                        </td>
+                        <%}%>
+                        <td class="center-block">
+
+                          <a href="/updateList/<%= item.projectid %>" class="btn btn-primary center-block">Update</a>
+                          <%if (status == 'super user') {%>
+                            <a href="/deleteList/<%= item.projectid %>" class="btn btn-danger center-block" >Delete</a>
+                            <%}%>
+                          </td>
+                        </tr>
+                        <% }); %>
+                      </tbody>
+                    </table>
+                    <!-- ============================== PAGINATION ==============================-->
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <% if(pagination.page > 1){ %>
+                          <li class="page-item">
+                            <a class="page-link"
+                            href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${parseInt(pagination.page)-1}`) %>"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                        </li>
+                        <% } %>
+
+                        <% for(let i=1; i <= pagination.pages; i++) { %>
+                          <li class="page-item<%= pagination.page == i ? ' active' : '' %>">
+                            <a class="page-link"
+                            href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${i}`) %>">
+                            <%= i %>
+                          </a>
+                        </li>
+                        <% } %>
+
+                        <% if(pagination.page < pagination.pages) { %>
+                          <li class="page-item">
+                            <a class="page-link"
+                            href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${parseInt(pagination.page)+1}`) %>"
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                        <% } %>
+                      </ul>
+                    </nav>
+
+                    <a class="btn btn-primary" href="/addList">Add</a>
+
+                  </div>
+                  <% include ../partials/footers %>

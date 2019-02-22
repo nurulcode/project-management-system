@@ -1,0 +1,91 @@
+<% include ../partials/headers %>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <hr class="my-2 bg-dark">
+          <li class="nav-item">
+            <a class="nav-link active" href="project_detail_page_overview">
+              <span data-feather="home"></span>
+              Overview <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_activity">
+              <span data-feather="file"></span>
+              Activity
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_members">
+              <span data-feather="users"></span>
+              Member
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_issues">
+              <span data-feather="help-circle"></span>
+              Issues
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2"><strong>Activity</strong></h1>
+        <h5>From <%-set7Dates[0]%> to <%-set7Dates[6]%></h5>
+      </div>
+      <div class="card">
+
+        <div class="card-body">
+
+          <h6>Today : <%-set7Dates[0]%></h6>
+          <%- console.log(dateOne);%>
+          <ul>
+            <% dateOne.forEach((item) => {%> <li> <%- item.title %> | : <%- item.description %> | Author : <%- item.fullname  %>    </li> <%})%>
+          </ul>
+
+          <h6><%-set7Days[1]%> : <%-set7Dates[1]%></h6>
+          <ul>
+            <% dateTwo.forEach((item) => {%> <li>  <%- item.title %> | <%- item.description %> | Author :  <%- item.fullname %> </li><%})%>
+          </ul>
+
+          <h6><%-set7Days[2]%> : <%-set7Dates[2]%></h6>
+          <ul>
+            <% dateThree.forEach((item) => {%> <li>  <%- item.title %> | <%- item.description %> | Author :  <%- item.fullname %> </li><%})%>
+          </ul>
+
+          <h6><%-set7Days[3]%> : <%-set7Dates[3]%></h6>
+          <ul>
+            <% dateFour.forEach((item) => {%> <li>  <%- item.title %> | <%- item.description %> | Author : <%- item.fullname %> </li><%})%>
+          </ul>
+
+          <h6><%-set7Days[4]%> : <%-set7Dates[4]%></h6>
+          <ul>
+            <% dateFive.forEach((item) => {%> <li>  <%- item.title %> | <%- item.description %> | Author : <%- item.fullname %> </li><%})%>
+          </ul>
+
+          <h6><%-set7Days[5]%> : <%-set7Dates[5]%></h6>
+          <ul>
+            <% dateSix.forEach((item) => {%> <li>  <%- item.title %> | <%- item.description %> | Author :  <%- item.fullname %> </li><%}) %>
+          </ul>
+
+          <h6><%-set7Days[6]%> : <%-set7Dates[6]%></h6>
+          <ul>
+            <% dateSeven.forEach((item) => {%> <li>  <%- item.title %> <%- item.description %>  | Author :  <%- item.fullname %> </li><%})%>
+          </ul>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <% include ../partials/footers %>

@@ -1,0 +1,37 @@
+<% include ../partials/headers %>
+
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-active">
+        <th scope="col">No</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Type</th>
+        <th scope="col" id="tableQu" >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach((item) => {%>
+        <tr>
+          <th scope="row"><%- item.userid %></th>
+          <td><%- item.email %></td>
+          <td><%- item.firstname %> <%- item.lastname %></td>
+          <td><%- (item.type == 1) ? 'fulltime' : 'part time'  %></td>
+          <td><%- item.role %></td>
+
+          <%if (item.userid !== session) {%>
+            <td id="tableQu" >
+              <a href="/profile/<%- item.userid %>"  class="btn btn-success"  >Edit</a>
+              <a href="/deleteUser/<%- item.userid %>"  class="btn btn-danger"  >Delete</a>
+            </td>
+            <%}%>
+
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+      <a href="/addUser" class="btn btn-primary">Add User</a>
+    </div>
+    <% include ../partials/footers %>

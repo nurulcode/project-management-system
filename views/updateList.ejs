@@ -1,0 +1,37 @@
+<% include ../partials/headers %>
+
+    <div class="container">
+        <h1><strong> UPDATE PROJECT </strong></h1>
+        <hr class="my-2">
+        <form action="" method="POST">
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="projectName" placeholder="Project Name" name="projectName" value="<%- project.name %>">
+                </div>
+            </div>
+            <br>
+            <% let first = true; users.forEach((item) => { %>
+            <div class="form-group row">
+                <% if(first){first = false; %>
+                <div class="col-sm-2">Members</div>
+                <% } else { %>
+                <div class="col-sm-2"></div>
+                <% } %>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="users"
+                            value="<%= `${item.userid}#${item.position}` %>" <%= members.includes(item.userid) ? ' checked' : '' %>>
+                        <label class="form-check-label" for="gridCheck1">
+                            <%= `${item.firstname} ${item.lastname}` %>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a href="/projects" class="btn btn-warning">Cancel</a>
+        </form>
+        </div>
+
+<% include ../partials/footers %>

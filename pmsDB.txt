@@ -1,0 +1,136 @@
+tbl_users
+
+options_project = json / text
+options_issues =
+options_members =
+  position =
+type =
+
+tbl_issues
+
+duedate = jatuh tempo (date/times)
+estimatedtime = real
+done = varchar  (progres bar)
+file = text (express file upload)
+spenttime / waktu yang di habiskan = real
+target version = varchar
+author = (membuat issues)
+parenttask = isu di buat kaya pohon ()
+
+login
+
+flash message
+express mysessionsecret
+
+projectid, subjectid, status
+
+{"opsi1": true, "opsi2": true, "opsi3":false}
+
+select json from tbl_users;
+
+laki-laki akan semakin kuat saat dia tersakiti
+
+{"opsi1": true, "opsi2": true, "opsi3":true}
+
+router.get('/add', ( req, res) => {
+  let sql = ` select * from tbl_users where userid=${req.session.user}`;
+  db.query(sql, (err, rows) => {
+
+    res.render('add', { data: rows.rows})
+  });
+});
+
+router.post('/add', ( req, res) => {
+  let sql = `insert into tbl`;
+  db.query(sql, (err, rows) => {
+    res.redirect('/')
+  });
+});
+
+router.post('/projects/:id', (req, res) => {
+  let sql = `update tbl_users set options_project = {"opsi1":${req.body.opsi1}, "opsi2":${req.body.opsi2}, "opsi3": `
+  db.query(sql, (req, res) => {
+  });
+  res.redirect('/')
+});
+
+|| kondisi, atau atau pilihan jika tidak ini itu.
+
+distinct menduplikat datanya atau di hidung sama
+group by
+
+//
+restful API
+resful adalah
+api adalah
+
+http harus melewati ssl ( sertifikat trjamin ) tujuan
+
+// http response code
+
+// tdd metodologi
+1. test unit sebelum di
+install test
+npm i install mocha chai-htpp -D
+mocca folder harus test utuk ngetes
+'use strict'
+
+untuk ngecek database
+
+router.get('/projects/:id/project_detail_page_activity', helpers.isLoggedIn, (req, res) => {
+
+  let get7Dates = helpers.get7Dates();
+  let get7Days = helpers.get7Days();
+
+  let date1 = `select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[0]}'`
+  console.log(date1);
+  db.query(date1, (err, date1) => {
+    console.log(date1.rows);
+    if(err) return res.send(err);
+    let date2 =`select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[1]}'`
+    db.query(date2, (err, date2) => {
+      if(err) return res.send(err);
+      let date3 =`select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[2]}'`
+      db.query(date3, (err, date3) => {
+        if(err) return res.send(err);
+        let date4 =`select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[3]}'`
+        db.query(date4, (err, date4) => {
+          if(err) return res.send(err);
+          let date5 =`select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[4]}'`
+          db.query(date5, (err, date5) => {
+            if(err) return res.send(err);
+            let date6 = `select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[5]}'`
+            db.query(date6, (err, date6) => {
+              if(err) return res.send(err);
+              let date7 = `select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[6]}'`
+              db.query(date7, (err, date7) => {
+                if(err) return res.send(err);
+                let date8 =`select tbl_activity.*, concat(tbl_users.firstname,' ',tbl_users.lastname) as fullname from tbl_activity inner join tbl_users on tbl_activity.author = tbl_users.userid where time::date = '${get7Dates[7]}'`
+                db.query(date8, (err, date8) => {
+                  if(err) return res.send(err);
+
+                  res.render(`/projects/${req.params.id}/project_detail_page_activity`, {
+                    session : req.session.user,
+                    data1 : data1.rows,
+                    data2 : data2.rows,
+                    data8 : data8.rows,
+                    get7Dates,
+                    get7Days
+                  })
+                })
+              })
+            })
+          })
+        })
+      })
+    })
+  })
+})
+
+
+res.render(`project_detail_page_activity`, {
+  session : req.session.user, set7Dates, set7Days, day0 : day0.rows
+})
+res.render(`project_detail_page_activity`, {
+  session : req.session.user, set7Dates, set7Days, day0 : day0.rows
+})

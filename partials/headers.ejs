@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Add Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+  <script src="/main.js"></script>
+  <style media="screen">
+  #tableQu  {
+    text-align: center;
+  }
+  i {
+    color: blue;
+    font-size: 17px;
+    s
+  }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/projects">Project Management System</a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/projects">Project</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile/<%= session %>">Profil</a>
+      </li>
+      <%if (status == 'super user') {%>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/<%= session %>">Users</a>
+      </li>
+      <%}%>
+    </ul>
+  </ul>
+  <form class="form-inline my-2 my-lg-0">
+    <a class="btn btn-outline-success my-2 my-sm-0" href="/" role="button">Sign Out</a>
+  </form>
+</div>
+</nav>
+<br>

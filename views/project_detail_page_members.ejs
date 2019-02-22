@@ -1,0 +1,149 @@
+<% include ../partials/headers %>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column nav-pills">
+
+          <hr class="my-2 bg-dark">
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_overview">
+              <span data-feather="home"></span>
+              Overview <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_activity">
+              <span data-feather="file"></span>
+              Activity
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_members">
+              <span data-feather="users"></span>
+              Member
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_issues">
+              <span data-feather="help-circle"></span>
+              Issues
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
+      <div class="container">
+        <h3><strong> Filters </strong></h3>
+        <!-- <div class="table-responsive"> -->
+        <form action="/projects/<%- params %>/project_detail_page_members" method="get" >
+          <input type="hidden" name="page" value="1" />
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label">
+              <input class="form-check-input" type="checkbox" name="checkid" value="true" <%- query.checkname ? 'checked' : '' %> >ID
+            </label>
+            <div class="col-10">
+              <input class="form-control" type="text" placeholder="ID" id="example-text-input" name="formid" value="<%- query.formid %>" >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label">
+              <input class="form-check-input" type="checkbox" name="checkname" value="true" <%- query.checkname ? 'checked' : '' %> >Name
+            </label>
+            <div class="col-10">
+              <input class="form-control" type="text" placeholder="Name" id="example-text-input" name="formname"
+              value="<%- query.formname %>" >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label">
+              <input class="form-check-input" type="checkbox" name="checkposision" value="true">Posision
+            </label>
+            <div class="col-10">
+              <select class="custom-select" name="formposision">
+                <option>Choose the members ...</option>
+                <option value="manager">Manager</option>
+                <option value="software developer">Software Developer</option>
+                <option value="quality assurance">Quality Assurance</option>
+              </select>
+            </div>
+          </div>
+
+          <div><br></div>
+          <button type="submit" class="btn btn-primary">Search</button>
+          <!-- <a href="/" class="btn btn-warning">reset</a> -->
+          <hr class="my-2">
+          <br>
+          <h2><strong> OPTION </strong></h2>
+          <div class="form-group row">
+            <div class="col-sm-2">Checkbox</div>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi1" value="true"  <%= query.opsi1 ?' checked' : '' ; %>>
+                <label class="form-check-label" for="gridCheck1">
+                  ID
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi2" value="true" <%= query.opsi2 ? 'checked' : ''; %>>
+                <label class="form-check-label" for="gridCheck1">
+                  Name
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1" name="opsi3" value="true" <%= query.opsi3 ? 'checked' : ''; %>>
+                <label class="form-check-label" for="gridCheck1">
+                  Members
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+        <hr class="my-2">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <%if(query.opsi1){%> <th scope="col">ID</th> <%}%>
+              <%if(query.opsi2){%> <th scope="col">Nama</th> <%}%>
+              <%if(query.opsi3){%> <th scope="col">Members</th> <%}%>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach((item) => { %>
+              <tr>
+                <%if(query.opsi1){%> <th scope="row"> <%= item.id %> </th> <%}%>
+                <%if(query.opsi2){%> <td> <%= item.firstname %> </td> <%}%>                      <%if(query.opsi3){%> <td> <%= item.role %> </td> <%}%>
+                <td class="center-block">
+
+                  <a href="updateMembers/<%= item.userid %>" class="btn btn-primary center-block">Edit</a>
+                  <%if (status == 'super user') {%>
+                  <a href="deleteMembers/<%= item.id %>" class="btn btn-danger center-block" >Delete</a>
+                  <%}%>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <a class="btn btn-primary" href="/projects/<%- params %>/addMembers" >Add Members</a>
+        </div>
+      </div>
+    </div>
+    <% include ../partials/footers %>

@@ -1,0 +1,65 @@
+<% include ../partials/headers %>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <hr class="my-2 bg-dark">
+          <li class="nav-item">
+            <a class="nav-link active" href="project_detail_page_overview">
+              <span data-feather="home"></span>
+              Overview <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_activity">
+              <span data-feather="file"></span>
+              Activity
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_members">
+              <span data-feather="users"></span>
+              Member
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="project_detail_page_issues">
+              <span data-feather="help-circle"></span>
+              Issues
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+      <h3><strong>Library System</strong></h3>
+      <div class="card">
+        <div class="card-body">
+          <strong>Issue Tracking</strong>
+          <ul>
+            <li>Bug: <%- bug1.total %> Open / <%- bug.total %></li>
+            <li>Feature: <%- feature1.total %> Open / <%- feature.total %></li>
+            <li>Support:<%- support1.total %> Open / <%- support.total %></li>
+          </ul>
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-body">
+          <strong>Members</strong>
+          <ul>
+            <% users.forEach((item) => {%>
+            <li> <%- item.fullname %></li>
+            <%})%>
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+<% include ../partials/footers %>
