@@ -146,6 +146,7 @@ module.exports = function(db){
 
       router.post('/', (req, res)=>{
         let sql = `select * from public.tbl_users where email='${req.body.email}' and password='${req.body.password}' `
+        console.log(sql);
         db.query(sql, (err, users)=>{
           if(err){
             res.send(err);
