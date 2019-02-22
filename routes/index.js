@@ -145,7 +145,7 @@ module.exports = function(db){
       });
 
       router.post('/', (req, res)=>{
-        let sql = `select * from tbl_users where email='${req.body.email}' and password='${req.body.password}' `
+        let sql = `select * from public.tbl_users where email='${req.body.email}' and password='${req.body.password}' `
         db.query(sql, (err, users)=>{
           if(err){
             res.send(err);
@@ -153,6 +153,7 @@ module.exports = function(db){
           if(users.rowCount > 0){
             req.session.user = users.rows[0].userid
             req.session.status = users.rows[0].status
+            console.log(users.rows[0])
             res.redirect('/projects')
           }else{
             req.flash('loginMessage', 'Username or password invalid')
