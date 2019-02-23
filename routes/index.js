@@ -250,17 +250,25 @@ module.exports = function(db){
       });
 
       router.get('/deleteList/:id', helpers.isLoggedIn, (req, res) => {
-        let sql = `delete from tbl_members where projectid = ${req.params.id}`
+        let sql = `delete from tbl_activity where projectid = ${req.params.id}`
         db.query(sql, (err) => {
           if (err) return res.send(err)
-          let sql1 = `delete from tbl_projects where projectid = ${req.params.id}`
-          db.query(sql1, (err) => {
+          let sql = `delete from tbl_issues where projectid = ${req.params.id}`
+          db.query(sql, (err) => {
             if (err) return res.send(err)
-            console.log('Delete')
-            res.redirect('/');
+            sql = `delete from tbl_members where projectid = ${req.params.id}`
+            db.query(sql, (err) => {
+              if (err) return res.send(err)
+              let sql = `delete from tbl_projects where projectid = ${req.params.id}`
+              db.query(sql, (err) => {
+                if (err) return res.send(err)
+                console.log('Delete')
+                res.redirect('/');
+              })
+            })
           })
         })
-      });
+      })
 
       // profile
       router.get('/profile/:id', helpers.isLoggedIn, (req, res) => {
