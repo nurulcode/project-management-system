@@ -710,7 +710,7 @@ module.exports = function(db){
 
 
 
-      router.get('/users/:id', helpers.isLoggedIn, (req, res) => {
+      router.get('/users', helpers.isLoggedIn, (req, res) => {
         let sql = `select * from tbl_users order by userid`;
         db.query(sql, (err, rows) => {
           res.render('users', { data: rows.rows, session : req.session.user, status : req.session.status})
@@ -729,12 +729,12 @@ module.exports = function(db){
       });
 
 
-      router.post('/deleteUser/:id', helpers.isLoggedIn, (req, res) => {
+      router.get('/deleteUser/:id', helpers.isLoggedIn, (req, res) => {
         let sql = `delete from tbl_members where userid = ${req.params.id}`;
         db.query(sql, (err, rows) => {
           let sql1 = `delete from tbl_users where userid = ${req.params.id}`;
           db.query(sql1, (err, rows) => {
-            res.redirect('users')
+            res.redirect('/users')
           });
         });
       });
@@ -757,6 +757,13 @@ module.exports = function(db){
           });
         }
       });
+
+
+      router.get('/logout', (req, res)=>{
+        req.session.destroy(()=>{
+          res.redirect('/')
+        })
+      })
 
 
       return router;
